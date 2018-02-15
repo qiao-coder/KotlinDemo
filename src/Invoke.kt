@@ -7,6 +7,11 @@ fun main(args: Array<String>) {
     val imp = Imp()
     //这里其实是imp.invoke("新年快乐，旺旺旺旺！")的简写
     println(imp("新年快乐，旺旺旺旺！"))
+
+    //Imp2本身就是一个函数类型
+    //注意函数类型((String)->Unit)和扩展函数类型,即带接收者的函数类型(String.()->Unit)的区别
+    val imp2 = Imp2()
+    listOf("abc").filter(imp2)
 }
 
 /**
@@ -15,7 +20,13 @@ fun main(args: Array<String>) {
  */
 class Imp : (String)->String{
     override fun invoke(p1: String): String {
-        return "invoke : $p1"
+        return "Imp : invoke : $p1"
+    }
+}
+class Imp2 : (String)->Boolean{
+    override fun invoke(p1: String): Boolean {
+        println("Imp2 : invoke : $p1")
+        return true
     }
 }
 
